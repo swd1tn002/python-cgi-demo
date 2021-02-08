@@ -50,16 +50,20 @@ Write your Python module:
 #!/usr/bin/python3
 import sys
 import json
+from datetime import datetime
 import cgitb
 cgitb.enable()
 
-print('Content-Type: text/html\n\n')
 
-# Print the request body:
-for line in sys.stdin:
-    print(line)
+print('Content-Type: text/plain\n\n')
 
-print('Done')
+request_body = '\n'.join(sys.stdin)
+
+data = json.loads(request_body)
+
+with open('output.txt', 'a') as file:
+    now = datetime.today()
+    file.write(f'{str(now)}\t{data["message"]}\t{data["crash"]}\n')
 ```
 
 
