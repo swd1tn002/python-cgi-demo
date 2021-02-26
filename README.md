@@ -57,9 +57,7 @@ cgitb.enable()
 
 print('Content-Type: text/plain\n\n')
 
-request_body = '\n'.join(sys.stdin)
-
-data = json.loads(request_body)
+data = json.load(sys.stdin)
 
 with open('output.txt', 'a') as file:
     now = datetime.today()
